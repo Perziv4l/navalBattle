@@ -6,3 +6,4 @@ porte-avion 1 4
 sous-marin 2 1
 cuirasser 2 3
 torpilleur 1 2
+;

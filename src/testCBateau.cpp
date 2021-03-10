@@ -26,7 +26,7 @@ int main(){
     try{
         CBateau testConstructErreur("Cuirasser",testConstrctErr,5);
         cout<<"Test Non Ok"<<endl;
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Test Ok"<<endl;
     }
 
@@ -50,7 +50,7 @@ int main(){
         }else{
             cout<<"Test Non Ok"<<endl;
         }
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Erreur de placement du bateau"<<endl;
     }
 
@@ -65,10 +65,10 @@ int main(){
             }else{
                 cout<<"Test Non Ok"<<endl;
             }
-        }catch(range_error s){
+        }catch(range_error& s){
             cout<<"Test Non Ok"<<endl;
         }
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Test Non Ok"<<endl;
     }
 
@@ -82,10 +82,10 @@ int main(){
             }else{
                 cout<<"Test Non Ok"<<endl;
             }
-        }catch(range_error s){
+        }catch(range_error& s){
             cout<<"Test Ok"<<endl;
         }
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Test Non Ok"<<endl;
     }
 
@@ -107,11 +107,11 @@ int main(){
             }else{
                 cout<<"Test Non Ok"<<endl;
             }
-        }catch(range_error t){
+        }catch(range_error& t){
             cout<<"Test Non Ok"<<endl;
         }
         
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Test Non Ok"<<endl;
     }
 
@@ -123,10 +123,10 @@ int main(){
         try{
             testDegatErreur.tirAdverse(tirAdversaireErr);
             cout<<"Test Non Ok"<<endl;
-        }catch(range_error t){
+        }catch(range_error& t){
             cout<<"Test Ok"<<endl;
         }
-    }catch(range_error c){
+    }catch(range_error& c){
         cout<<"Test Non Ok"<<endl;
     }
     return 0;

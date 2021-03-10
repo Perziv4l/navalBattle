@@ -132,3 +132,19 @@ void CBateau:: operator=(const CBateau& bateau){
     this-> m_pDegats = bateau.m_pDegats;
 }
 
+CBateau :: CBateau(const CBateau &bateau){
+
+    if (bateau.m_pDegats != NULL) {
+        m_pDegats = new bool[bateau.m_taille];
+        for (int i = 0; i < bateau.m_taille; i++) {
+            m_pDegats[i] = bateau.m_pDegats[i];
+        }
+    } else {
+        m_pDegats = NULL;
+    }
+
+    m_taille = bateau.m_taille;
+    m_position = bateau.m_position;
+    m_nom = bateau.m_nom;
+}
+
