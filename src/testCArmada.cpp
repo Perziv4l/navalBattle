@@ -5,6 +5,8 @@ void testGetEffectifTotalNormal();
 void testGetBateauNormal();
 void testGetBateauErreur();
 void testGetEffectifNormal();
+void testGetArmadaFromFile();
+void testPositionAutomatique();
 
 int main(){
 
@@ -12,9 +14,9 @@ int main(){
     testGetEffectifTotalNormal();
     testGetBateauNormal();
     testGetBateauErreur();
-    //testGetEffectifTotalErreur();
     testGetEffectifNormal();
-    //testGetEffectifErreur();
+    testGetArmadaFromFile();
+    testPositionAutomatique();
 }
 
 void testAjouterNormal(){
@@ -85,4 +87,28 @@ void testGetEffectifNormal(){
         cout<<"Test Non Ok"<<endl;
     }
 
+}
+
+void testGetArmadaFromFile(){
+
+    cout<<"Test Get Armada from File"<<endl;
+    CArmada test;
+    test.getArmadaFromFile();
+    if(test.getEffectifTotal() == 6){
+        cout<<"Test Ok!"<<endl;
+    }else{
+        cout<<"Test Non Ok"<<endl;
+    }
+}
+
+void testPositionAutomatique(){
+
+    cout<<"Test Position Auto"<<endl;
+    CArmada test;
+    test.getArmadaFromFile();
+    if(test.placerAleatoirement()==true){
+       cout<<"Test Ok!"<<endl;
+    }else{
+        cout<<"Test Non Ok"<<endl;
+    }
 }

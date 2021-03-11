@@ -56,6 +56,21 @@ compilTestCArmada :
 	@echo Compilation testCArmada
 	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CBateau.o $(BIN)/CArmada.o -o $(BIN)/testCArmada.bin
 
+# La cible "testArmada" est exécutée en tapant la commande "make testArmada"
+testCGui : deleteAll compilCGui compilCGui compilTestCGui
+
+# La cible "compilCBateau" est exécutée en tapant la commande "make compilCBateau"
+compilCGui :
+	@# Précéder chaque commande d'une TABULATION
+	@echo Compilation CGui
+	$(GPP) $(SRC)/CGui.cpp -o $(BIN)/CGui.o -c
+
+# La cible "compilTestCArmada" est exécutée en tapant la commande "make compilTestCAramada"
+compilTestCGui :
+	@# Précéder chaque commande d'une TABULATION
+	@echo Compilation testCGui
+	$(GPP) $(SRC)/testCGui.cpp -o $(BIN)/testCGui.bin
+
 # ICI, la cible de compilation finale pour obtenir main.bin
 # A executer A LA FIN du projet en s'assurant que toutes les classes du projet compilent et s'exécutent sans erreurs !
 # La cible "lanceurFinal"
