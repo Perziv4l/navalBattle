@@ -18,7 +18,7 @@ CGui :: ~CGui(){
     delete[] this -> m_pCoup;
 }
 
-void CGui :: setArmadaCoup(CArmada* pArmada,CCoups* pCoup){
+void CGui :: setArmadaCoups(CArmada* pArmada,CCoups* pCoup){
     this -> m_pArmada = pArmada;
     this -> m_pCoup = pCoup;
 
@@ -70,7 +70,7 @@ void CGui :: afficheGagne(){
     cout<<"***************VOUS AVEZ GAGNE !!!!!***************"<<endl;
 }
 
-void CGui :: affichePerdue(){
+void CGui :: affichePerdu(){
 
     cout<<"***************VOUS AVEZ PERDUE ;( ***************"<<endl;
 }
@@ -125,24 +125,57 @@ void CGui :: remplirDeuxGrilles(ostream& os){
     afficherLaGrille(os,"adversaire");
 }
 
-void CGui :: afficherLaGrille(ostream& os,string jouOuAdv){
-    
-    string grille = "Grille"+jouOuAdv+"\n";
-    for(int i=0; i<TAILLE_GRILLE;i++){
-        if(i==0){
-            grille += "        ";
-        }else{
-            grille += to_string(i-1) + "      ";
+void CGui::afficherLaGrille(ostream &os, string jouOuAdv)
+{
+  if (jouOuAdv.compare("joueur") == 0)
+  {
+    os << "========== Your grid ==========" << endl;
+    for (int i = 0; i < TAILLE_GRILLE; i++)
+    {
+      if (i == 0)
+      {
+        for(int j =0; j<TAILLE_GRILLE-1;j++){
+            os << "   "<<j;
         }
-    }
-    for(int i=0;i<TAILLE_GRILLE;i++){
-        grille += "\n \n"+to_string(i)+"      ";
-        for(int y=0;y<TAILLE_GRILLE;y++){
-            if(this -> m_grilleJou[i][y]!= 'O' || this -> m_grilleJou[i][y]!= 'X' || this -> m_grilleJou[i][y]!= 'B'){
-                grille += "       ";
-            }else{
-                grille += this -> m_grilleJou[i][y]+"      ";
-            }
+      }
+      else
+      {
+        os << i - 1 << "  ";
+
+        for (int j = 0; j < TAILLE_GRILLE - 1; j++)
+        {
+          string theCase(1, m_grilleJou[i - 1][j]);
+          os << theCase << "   ";
         }
+      }
+
+      os << endl;
     }
+  }
+  else if (jouOuAdv.compare("adversaire") == 0)
+  {
+    os << "======= Opponent's grid =======" << endl;
+    for (int i = 0; i < TAILLE_GRILLE; i++)
+    {
+      if (i == 0)
+      {
+        for(int j =0; j<TAILLE_GRILLE-1;j++){
+            os << "   "<<j;
+        }
+      }
+      else
+      {
+        os << i - 1 << "  ";
+
+        for (int j = 0; j < TAILLE_GRILLE - 1; j++)
+        {
+          char currentCase = m_grilleAdv[i - 1][j];
+          os << currentCase << "   ";
+        }
+      }
+
+      os << endl;
+    }
+  }
+  os << endl;
 }

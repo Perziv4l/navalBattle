@@ -129,5 +129,31 @@ int main(){
     }catch(range_error& c){
         cout<<"Test Non Ok"<<endl;
     }
+
+    cout<<"Test Degat sur Bateau grand"<<endl;
+    pair<int,int> degats(2,3);
+    try{
+        CBateau testDegat("Sous Marin",degats,2);
+        pair<int,int> tirAdversaire(2,3);
+        try{
+            testDegat.tirAdverse(tirAdversaire);
+            if(testDegat.getDegats(0)){
+                cout<<"Test Ok"<<endl;
+            }else{
+                cout<<"Test Non Ok"<<endl;
+            }
+            cout<<"Test Coulé"<<endl;
+            if(!testDegat.estCoule()){
+                cout<<"Test Ok"<<endl;
+            }else{
+                cout<<"Test Non Ok"<<endl;
+            }
+        }catch(range_error& t){
+            cout<<"Test Non Ok"<<endl;
+        }
+        
+    }catch(range_error& c){
+        cout<<"Test Non Ok"<<endl;
+    }
     return 0;
 }

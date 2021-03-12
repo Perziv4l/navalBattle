@@ -19,6 +19,9 @@ CBateau :: CBateau(string n, pair<int,int> p, int t){
         this-> m_position = p;
         this-> m_taille = t;
         this-> m_pDegats = new bool[this-> m_taille];
+        for(int i=0;i<this -> m_taille;i++){
+            this-> m_pDegats[i] = false;
+        }
     }
 
 }
@@ -70,8 +73,8 @@ bool CBateau :: estCoule(){
 
     bool ret = true;
 
-    for(int i=0; i<this-> m_taille; i++){
-        if(this-> getDegats(i) == false){
+    for(int i= 0; i<this-> m_taille; i++){
+        if(getDegats(i) == false){
             ret = false;
         }
     }
@@ -81,22 +84,21 @@ bool CBateau :: estCoule(){
 
 bool CBateau :: tirAdverse(pair<int,int> p){
 
-    bool ret = false;
+    bool touche = false;
     if(p.first <0 || p.second<0 || p.first >9 || p.second >9){
         range_error t("Tir avec de mauvaise coordonnés");
         throw t;
     }else{
-        if(p.first == this-> m_position.first){
-            for(int i=this-> m_position.second;i<this-> m_taille+this-> m_position.second;i++){
-                if(p.second == this-> m_position.second && this->m_pDegats[i-this-> m_position.second]==false){
-                    ret = true;
-                    this-> m_pDegats[i-this-> m_position.second]=true;
-                }
+
+        //To do
+        for(int i=m_position.second; i< i+this-> m_taille-1;i++){
+            if(p.first == m_position.first && p.second == i && getDegats(i-m_position.second)){
+                touche = true;
             }
         }
     }
-    return ret;
 
+    return touche;
 }
 
 ostream& operator<<(ostream& os,CBateau& theB){

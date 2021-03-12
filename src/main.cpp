@@ -4,7 +4,7 @@
 #include "CGui.h"
 #include "BiblioStd.h"
 
-// Simple signature de la fonction dialogueChoix à déclarer ici
+// Simple signature de la fonction dialogueChoix ï¿½ dï¿½clarer ici
 int dialogueChoix ();
 
 int main() {
@@ -13,14 +13,14 @@ int main() {
 	CGui* pGuiCli = NULL;
 	bool okPlcmt;
 
-	// Nombre de cases de bateaux adverses touchées par des tirs.
-	// Si ce nombre = nbre total de cases de la flottille alors la flottille adverse est coulée.
+	// Nombre de cases de bateaux adverses touchï¿½es par des tirs.
+	// Si ce nombre = nbre total de cases de la flottille alors la flottille adverse est coulï¿½e.
 	int nbToucheAdverse = 0;
 
-	// Pour démarrer : choix client ou serveur
+	// Pour dï¿½marrer : choix client ou serveur
 	int choix = dialogueChoix ();
 	
-	// Initialisation aléatoire
+	// Initialisation alï¿½atoire
 	srand(time(NULL));
 
 	switch (choix) {
@@ -29,39 +29,39 @@ int main() {
 		case 0: {
 			cout << "Mode serveur demarre..." << endl;
 
-			// Construction de l'interface utilisateur côté serveur
+			// Construction de l'interface utilisateur cï¿½tï¿½ serveur
 			pGuiServ = new CGui();
 
-			// Création du joueur de type serveur
+			// Crï¿½ation du joueur de type serveur
 			CJoueurServ jouServ ( pGuiServ );
 
 			// Ouvrir la socket sur le port PORTCOM
-			// Le serveur se met à l'écoute d'une connexion client sur ce port
-			// Si cela se passe mal, une exception logic_error est lancée (et pas capturée...)
+			// Le serveur se met ï¿½ l'ï¿½coute d'une connexion client sur ce port
+			// Si cela se passe mal, une exception logic_error est lancï¿½e (et pas capturï¿½e...)
 			jouServ.openSocket( PORTCOM );
 
 			// Attendre le client
-			// Le message "... en attente du client" doit apparaître
+			// Le message "... en attente du client" doit apparaï¿½tre
 			jouServ.attenteClient();
 
-			// Récupérer les données du jeu à partir du fichier "flotille.txt" qui se trouve dans /ws.
-			// L'armada est construite dynamiquement : on crée un pointeur sur cette armada.
+			// Rï¿½cupï¿½rer les donnï¿½es du jeu ï¿½ partir du fichier "flotille.txt" qui se trouve dans /ws.
+			// L'armada est construite dynamiquement : on crï¿½e un pointeur sur cette armada.
 			CArmada* pArmServ  = new CArmada();
 			pArmServ->getArmadaFromFile();
 
-			// Envoyer les données du jeu au client.
-			// L'armada "pArmServ" est envoyée par réseau au client.
+			// Envoyer les donnï¿½es du jeu au client.
+			// L'armada "pArmServ" est envoyï¿½e par rï¿½seau au client.
 			jouServ.envoisArmadaVersClient ( *pArmServ );
 
-			// Le serveur attend que le client ait positionné ses bateaux.
-			// attendre() est méthode de CJoueur.
+			// Le serveur attend que le client ait positionnï¿½ ses bateaux.
+			// attendre() est mï¿½thode de CJoueur.
 			jouServ.attendre();
 			
-			// Structure de données des tirs pour le serveur créée.
+			// Structure de donnï¿½es des tirs pour le serveur crï¿½ï¿½e.
 			CCoups* pCoupsServ = new CCoups();
 
-			// Mise à jour de la GUI du serveur.
-			// A noter : les structures pointées par pArmServ et pCoupsServ seront détruites dans le destructeur de CGui.
+			// Mise ï¿½ jour de la GUI du serveur.
+			// A noter : les structures pointï¿½es par pArmServ et pCoupsServ seront dï¿½truites dans le destructeur de CGui.
 			pGuiServ->setArmadaCoups ( pArmServ, pCoupsServ );
 			
 			// Finalement, le serveur place ses bateaux sur sa grille.
@@ -70,36 +70,36 @@ int main() {
 			else cout << endl << "*** PLACEMENT armada IMPOSSIBLE ! ***" << endl << endl;			
 
 			/*** DEBUT DU JEU ***/
-			// ancienne version du while(...) plus nécessaire, la sortie se faisant avec 2 break
+			// ancienne version du while(...) plus nï¿½cessaire, la sortie se faisant avec 2 break
 			// while ( (pArmServ->getEffectif() > 0) && (pArmServ->getNbreTotCases() != nbToucheAdverse) && okPlcmt ) {
 			while ( okPlcmt ) {
 
 				// C'est le serveur qui tire en premier
 				pair<int,int> coup = pGuiServ->choisirAttaque ();
 				
-				// envoie d'un tir au client par réseau
-				// ET récupération de sa réponse (coulé, touché ou plouf) pour mettre à jour pCoupsServ
+				// envoie d'un tir au client par rï¿½seau
+				// ET rï¿½cupï¿½ration de sa rï¿½ponse (coulï¿½, touchï¿½ ou plouf) pour mettre ï¿½ jour pCoupsServ
 				jouServ.attaque ( coup, *pCoupsServ );
 				
 				// Afficher les deux grilles pour le serveur
 				cout << *pGuiServ;
 
-				// mise à jour de nbToucheAdverse
+				// mise ï¿½ jour de nbToucheAdverse
 				
 				nbToucheAdverse = pCoupsServ->getCoupsBut();
-				// Si toutes les cases de l'adversaire sont touchées alors le serveur a gagné	
+				// Si toutes les cases de l'adversaire sont touchï¿½es alors le serveur a gagnï¿½	
 				if (pArmServ->getNbreTotCases() == nbToucheAdverse) {
-					// le serveur a gagné
+					// le serveur a gagnï¿½
 					cout << "LE SERVEUR" << endl;
 					pGuiServ->afficheGagne();
 					break;
 				}
 
-				// ATTENTE d'une attaque client par réseau
-				// Dès que le client tire, on lui envoie une réponse : coulé, touché ou plouf
+				// ATTENTE d'une attaque client par rï¿½seau
+				// Dï¿½s que le client tire, on lui envoie une rï¿½ponse : coulï¿½, touchï¿½ ou plouf
 				jouServ.attaqueAdverse (pArmServ, pCoupsServ);
 				
-				// suite à l'attaque, le serveur peut perdre
+				// suite ï¿½ l'attaque, le serveur peut perdre
 				// Si il ne reste plus aucun bateau alors le serveur a perdu								              
 				if (pArmServ->getEffectif() == 0) {
 					// le serveur a perdu
@@ -112,7 +112,7 @@ int main() {
 				cout << *pGuiServ;
 			}
 
-			// Obligatoire sinon "case 1" exécuté
+			// Obligatoire sinon "case 1" exï¿½cutï¿½
 			break;
 		}
 
@@ -121,50 +121,50 @@ int main() {
 
 			cout << "Mode client demarre..." << endl;
 
-			// Construction de l'interface utilisateur côté client
+			// Construction de l'interface utilisateur cï¿½tï¿½ client
 			pGuiCli = new CGui();
 
 			// Se connecter au serveur sur le port PORTCOM
 			CJoueurCli jouCli ( pGuiCli );
-			// Si cela se passe mal, une exception logic_error est lancée (et pas capturée...)
+			// Si cela se passe mal, une exception logic_error est lancï¿½e (et pas capturï¿½e...)
 			jouCli.connectServer ( "localhost", PORTCOM );	// "localhost" ou "127.0.0.1"
 
 			cout << "Connexion au serveur Ok" << endl;
 
-			// Récupérer les données du jeu.
-			// C'est le serveur qui crée l'armada client et le lui envoie par réseau.
+			// Rï¿½cupï¿½rer les donnï¿½es du jeu.
+			// C'est le serveur qui crï¿½e l'armada client et le lui envoie par rï¿½seau.
 			CArmada* pArmCli  = jouCli.getArmadaCli();
 			
-			// Structure de données des tirs pour le client créée.
+			// Structure de donnï¿½es des tirs pour le client crï¿½ï¿½e.
 			CCoups* pCoupsCli = new CCoups();
 
-			// Mise à jour de la GUI du client.
-			// A noter : les structures pointées par pArmCli et pCoupsCli seront détruites dans le destructeur de CGui.
+			// Mise ï¿½ jour de la GUI du client.
+			// A noter : les structures pointï¿½es par pArmCli et pCoupsCli seront dï¿½truites dans le destructeur de CGui.
 			pGuiCli->setArmadaCoups ( pArmCli, pCoupsCli );
 			
 			// Le client place ses bateaux sur sa grille.
 			okPlcmt = pGuiCli->positionnerBateaux();
 			if (okPlcmt) {
 				cout << endl << "Placement armada reussi..." << endl << endl;
-				// Le client informe le serveur qu'il a placé ses bateaux
+				// Le client informe le serveur qu'il a placï¿½ ses bateaux
 				jouCli.ok();
 			}				
 			else cout << endl << "*** PLACEMENT armada IMPOSSIBLE ! ***" << endl << endl;						
 			
 
 			/*** DEBUT DE PARTIE (pour le client) ***/
-			// ancienne version du while(...) plus nécessaire, la sortie se faisant avec 2 break
+			// ancienne version du while(...) plus nï¿½cessaire, la sortie se faisant avec 2 break
 			// while ( (pArmCli->getEffectif() > 0) && ( pArmCli->getNbreTotCases() != nbToucheAdverse ) && okPlcmt ) {
 			while ( okPlcmt ) {
 
-				// ATTENTE d'une attaque du serveur par réseau
-				// Dès que le serveur tire, on lui envoie une réponse : coulé, touché ou plouf
+				// ATTENTE d'une attaque du serveur par rï¿½seau
+				// Dï¿½s que le serveur tire, on lui envoie une rï¿½ponse : coulï¿½, touchï¿½ ou plouf
 				jouCli.attaqueAdverse (pArmCli, pCoupsCli);
 
 				// Afficher les deux grilles pour le client
 				cout << *pGuiCli;
 
-				// suite à l'attaque, le client peut perdre
+				// suite ï¿½ l'attaque, le client peut perdre
 				// Si il ne reste plus aucun bateau alors le client a perdu			               
 				if (pArmCli->getEffectif() == 0) {
 					// le client a perdu
@@ -173,22 +173,22 @@ int main() {
 					break;
 				}
 
-				// au client à choisir un tir
+				// au client ï¿½ choisir un tir
 				pair<int,int> coup = pGuiCli->choisirAttaque ();
 
-				// envoie d'un tir au serveur par le réseau
-				// ET récupération de sa réponse (coulé, touché ou plouf) pour mettre à jour pCoupsCli
+				// envoie d'un tir au serveur par le rï¿½seau
+				// ET rï¿½cupï¿½ration de sa rï¿½ponse (coulï¿½, touchï¿½ ou plouf) pour mettre ï¿½ jour pCoupsCli
 				jouCli.attaque ( coup, *pCoupsCli );
 				
 				// Afficher les deux grilles pour le client
 				cout << *pGuiCli;
 			
-				// mise à jour de nbToucheAdverse
+				// mise ï¿½ jour de nbToucheAdverse
 				nbToucheAdverse = pCoupsCli->getCoupsBut();
 				
-				// Si toutes les cases de l'adversaire sont touchées alors le client a gagné
+				// Si toutes les cases de l'adversaire sont touchï¿½es alors le client a gagnï¿½
 				if (pArmCli->getNbreTotCases() == nbToucheAdverse) {
-					// le client a gagné
+					// le client a gagnï¿½
 					cout << "LE CLIENT" << endl;
 					pGuiCli->afficheGagne();
 					break;

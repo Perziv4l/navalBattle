@@ -80,65 +80,41 @@ void CArmada :: getArmadaFromFile(){
 
 bool CArmada :: placerAleatoirement(){
 
-    srand( (unsigned)time(NULL));
-    int borneSup = TAILLE_GRILLE - 2;
+    for(int i =0; i< (int)this-> m_listeBateaux.size();i++){
 
-    if (this->getNbreTotCases() > borneSup*borneSup) {
-        return false;
-    }
+        bool save = false;
+        int positionYmax;
+        int positionXmin;
+        int positionYmin;
+        while(!save){
 
-    vector<pair<int, int>> busy_cases;
-    int error = 0;
-
-    for (int i = 0; i < (int)m_listeBateaux.size(); i++) {
-
-        int x = rand()%(borneSup + 1);
-        int y = rand()%(borneSup + 1);
-
-        int j = 0;
-        bool found = true;
-
-        if (x + this->m_listeBateaux[i].getTaille() > borneSup) {
-            found = false;
-        } else if (i > 0) {
-
-            while (found and j <= (int)busy_cases.size()) {
-
-                for (int k = 0; k < this->m_listeBateaux[i].getTaille(); k++) {
-
-                    if (&busy_cases[j] != NULL and busy_cases[j].first == x+k and busy_cases[j].second == y) {
-                        found = false;
+            save = true;
+            positionXmin = rand()%(TAILLE_GRILLE - 1);
+            positionYmin = rand()%(TAILLE_GRILLE - 1);
+            positionYmax = positionYmin + this-> m_listeBateaux[i].getTaille()-1;
+            if(positionYmax>TAILLE_GRILLE-1){
+                save = false;
+            }
+            for(int j =0; j< (int)this-> m_listeBateaux.size();j++){
+                for(int y =0; y< (int)this-> m_listeBateaux[j].getTaille();y++){
+                    for(int z=positionYmin; z<=positionYmax; z++){
+                        if(this-> m_listeBateaux[j].getPosition().first == positionXmin && this-> m_listeBateaux[j].getPosition().second + y == z){
+                            save = false;
+                        }
                     }
-
                 }
-
-                j++;
-
             }
         }
-
-        if (found) {
-
-            for (int j = 0; j < this->m_listeBateaux[i].getTaille(); j++) {
-                busy_cases.push_back(make_pair(x+j,y));
-            }
-
-            this->m_listeBateaux[i].setPosition(x,y);
-
-            i++;
-
-        } else {
-
-            error++;
-
-            if (error >= MAXESSAIS) {
-                return false;
-            }
-
-        }
-
+        this-> m_listeBateaux[i].setPosition(positionXmin,positionYmin);
+        save = false;
     }
 
+    for(int i=0;i<(int)this -> m_listeBateaux.size();i++){
+        string prems = to_string(this ->m_listeBateaux[i].getPosition().first);
+        string deuz = to_string(this -> m_listeBateaux[i].getPosition().second);
+
+        cout<<prems<<deuz<<endl;
+    }
     return true;
 
 }

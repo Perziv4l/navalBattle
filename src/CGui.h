@@ -13,8 +13,9 @@
 #include "CArmada.h"
 #include "CCoups.h"
 #include "CBateau.h"
+#include "CBaseJeu.h"
 
-class CGui {
+class CGui : public CBaseJeu{
 
     private:
         char m_grilleJou[TAILLE_GRILLE-1][TAILLE_GRILLE-1];
@@ -26,11 +27,11 @@ class CGui {
         CGui();
         CGui(CArmada* pArmada,CCoups* pCoup);
         ~CGui();
-        void setArmadaCoup(CArmada* pArmada, CCoups* pCoup);
+        void setArmadaCoups(CArmada* pArmada, CCoups* pCoup);
         bool positionnerBateaux();
         pair<int,int> choisirAttaque();
         void afficheGagne();
-        void affichePerdue();
+        void affichePerdu();
         friend ostream& operator<< ( ostream&os, CGui& theG );
         void remplirDeuxGrilles(ostream& os);
         void afficherLaGrille(ostream&   os,string jouOuAdv );
