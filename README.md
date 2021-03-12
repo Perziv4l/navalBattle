@@ -7,4 +7,5 @@ Pour les tests, un makefile vous indique les commandes à suivre, mais étant do
 make testCBateau
 make testCArmada
 make testCGui
+Je préconise de mettre la console en 75*29.
 Enjoy the game and the life.
