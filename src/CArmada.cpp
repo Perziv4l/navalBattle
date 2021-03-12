@@ -1,6 +1,9 @@
 #include "CArmada.h"
 
-
+/**
+ * Fonction qui permet d'ajouter un bateau à l'armada
+ * @param unBat le bateau à ajouter
+ */
 void CArmada :: ajouterBateau(CBateau& unBat){
 
     if (&m_listeBateaux == NULL){
@@ -10,6 +13,11 @@ void CArmada :: ajouterBateau(CBateau& unBat){
     }
 }
 
+/**
+ * getter d'un bateau de l'arsenal
+ * @param i l'indice du bateau dans le tableau de l'Armada
+ * @return CBateau le pointeur qui pointe le Bateau
+ */
 CBateau* CArmada :: getBateau(int i){
 
     if((i >= (int)this -> m_listeBateaux.size()) | (i < 0)){
@@ -19,12 +27,20 @@ CBateau* CArmada :: getBateau(int i){
     return &this-> m_listeBateaux[i];
 }
 
+/**
+ * getter de l'effectif total coulé et vivant
+ * @return int, le nombre de bateau de l'armada
+ */
 int CArmada :: getEffectifTotal(){
 
     return (int)(this-> m_listeBateaux).size();
 
 }
 
+/**
+ * getter du nombre de case que prend l'armada
+ * @return int, nombre de case de l'armade
+ */
 int CArmada :: getNbreTotCases(){
 
     int ret =0;
@@ -36,6 +52,10 @@ int CArmada :: getNbreTotCases(){
     return ret;
 }
 
+/**
+ * getter de l'effectif non coulé de l'armada
+ * @return int, nombre de bateau encore en vie
+ */
 int CArmada :: getEffectif(){
 
     int ret =0;
@@ -50,6 +70,10 @@ int CArmada :: getEffectif(){
     return ret;
 }
 
+/**
+ * Rempli l'armada à partir du fichier ws/flotille.txt
+ * Elle prend toutes les lignes non commenté et à partir d'un patern spécifique ajoute les bateau à l'armada
+ */
 void CArmada :: getArmadaFromFile(){
 
     const char* nomFich= "/home/perzival/Desktop/IUT/C++/ProjetNavalBattleEtud/navalBattle/ws/flotille.txt";
@@ -78,6 +102,11 @@ void CArmada :: getArmadaFromFile(){
 }
 
 
+/**
+ * place aléatoirement les bateaux sur la grille
+ * elle vérifie que les bateaux ne sorte pas de la grille mais aussi que 2 bateaux ne se superpose pas
+ * @return bool, vrai si le placement aléatoire s'est bien passé et faux si non
+ */
 bool CArmada :: placerAleatoirement(){
 
     for(int i =0; i< (int)this-> m_listeBateaux.size();i++){
@@ -107,13 +136,6 @@ bool CArmada :: placerAleatoirement(){
         }
         this-> m_listeBateaux[i].setPosition(positionXmin,positionYmin);
         save = false;
-    }
-
-    for(int i=0;i<(int)this -> m_listeBateaux.size();i++){
-        string prems = to_string(this ->m_listeBateaux[i].getPosition().first);
-        string deuz = to_string(this -> m_listeBateaux[i].getPosition().second);
-
-        cout<<prems<<deuz<<endl;
     }
     return true;
 

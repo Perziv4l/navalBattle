@@ -142,7 +142,7 @@ int main(){
             }else{
                 cout<<"Test Non Ok"<<endl;
             }
-            cout<<"Test Coulé"<<endl;
+            cout<<"Test Coulé erreur"<<endl;
             if(!testDegat.estCoule()){
                 cout<<"Test Ok"<<endl;
             }else{

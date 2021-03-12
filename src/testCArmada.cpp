@@ -2,6 +2,7 @@
 
 void testAjouterNormal();
 void testGetEffectifTotalNormal();
+void testGetNbrTotalCase();
 void testGetBateauNormal();
 void testGetBateauErreur();
 void testGetEffectifNormal();
@@ -12,6 +13,7 @@ int main(){
 
     testAjouterNormal();
     testGetEffectifTotalNormal();
+    testGetNbrTotalCase();
     testGetBateauNormal();
     testGetBateauErreur();
     testGetEffectifNormal();
@@ -108,6 +110,18 @@ void testPositionAutomatique(){
     test.getArmadaFromFile();
     if(test.placerAleatoirement()==true){
        cout<<"Test Ok!"<<endl;
+    }else{
+        cout<<"Test Non Ok"<<endl;
+    }
+}
+
+void testGetNbrTotalCase(){
+
+    cout<<"Test Get nombre total case"<<endl;
+    CArmada taille;
+    taille.getArmadaFromFile();
+    if(taille.getNbreTotCases()==14){
+        cout<<"Test Ok!"<<endl;
     }else{
         cout<<"Test Non Ok"<<endl;
     }

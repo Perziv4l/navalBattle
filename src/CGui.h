@@ -26,7 +26,7 @@ class CGui : public CBaseJeu{
     public:
         CGui();
         CGui(CArmada* pArmada,CCoups* pCoup);
-        ~CGui();
+        virtual ~CGui();
         void setArmadaCoups(CArmada* pArmada, CCoups* pCoup);
         bool positionnerBateaux();
         pair<int,int> choisirAttaque();
