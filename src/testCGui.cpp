@@ -1,8 +1,4 @@
-#include "BiblioStd.h"
 #include "CGui.h"
-#include "CArmada.h"
-#include "CBateau.h"
-#include "CCoups.h"
 
 void testPositionnerBateaux();
 
@@ -16,7 +12,7 @@ int main(){
 void testPositionnerBateaux(){
 
     cout<<"Test Positionner bateaux"<<endl;
-    CGui test;
+    //CGui test = CGui();
     /**CArmada gogo;
     CCoups aie;
     test.setArmadaCoups(&gogo,&aie);

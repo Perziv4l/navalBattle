@@ -56,7 +56,7 @@ compilTestCArmada :
 	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CBateau.o $(BIN)/CArmada.o -o $(BIN)/testCArmada.bin
 
 # La cible "testGui" est exécutée en tapant la commande "make testCGui"
-testCGui : deleteAll compilCGui compilCGui compilTestCGui
+testCGui : deleteAll compilCBateau compilCArmada compilCCoups compilCGui compilTestCGui
 
 # La cible "compilCGui" est exécutée en tapant la commande "make compilCGui"
 compilCGui :
