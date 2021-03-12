@@ -4,12 +4,24 @@ CGui :: CGui(){
 
     this -> m_pArmada = NULL;
     this -> m_pCoup = NULL;
+    for(int i=0; i<TAILLE_GRILLE-1;i++){
+        for(int y=0; y<TAILLE_GRILLE-1;y++){
+            this-> m_grilleAdv[i][y]='-';
+            this-> m_grilleJou[i][y]='-';
+        }
+    }
 }
 
 CGui :: CGui(CArmada* pArmada,CCoups* pCoup){
 
     this -> m_pArmada = pArmada;
     this -> m_pCoup = pCoup;
+    for(int i=0; i<TAILLE_GRILLE-1;i++){
+        for(int y=0; y<TAILLE_GRILLE-1;y++){
+            this-> m_grilleAdv[i][y]='-';
+            this-> m_grilleJou[i][y]='-';
+        }
+    }
 }
 
 CGui :: ~CGui(){

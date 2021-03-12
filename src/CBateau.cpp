@@ -89,15 +89,13 @@ bool CBateau :: tirAdverse(pair<int,int> p){
         range_error t("Tir avec de mauvaise coordonnés");
         throw t;
     }else{
-
-        //To do
-        for(int i=m_position.second; i< i+this-> m_taille-1;i++){
-            if(p.first == m_position.first && p.second == i && getDegats(i-m_position.second)){
+        for(int i=0; i< this-> m_taille;i++){
+            if(p.first == this-> m_position.first && p.second == this-> m_position.second + i && !getDegats(i)){
                 touche = true;
+                this-> m_pDegats[i] = true;
             }
         }
     }
-
     return touche;
 }
 
